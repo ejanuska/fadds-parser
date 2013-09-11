@@ -1,0 +1,20 @@
+Steps to build a new FADDS (Facility Aeronautical Data Distribution System) database
+
+1. Download new FADDS data from NDFC, "https://nfdc.faa.gov/portal/login.do"
+   to fadds folder.
+   Login ID ejanuska@gmail.com
+
+2. Extract files to fadds/data on local computer.
+
+3. Parse and delimit data using "java FaddsDataScanner" from command line.
+
+4. Upload contents of delimited_data folder to server "data" folder.
+
+5. Create new FADDS database "januskad_faddsDDMMYYYY". Where DD is the date, MM is the month, YYYY is the year,
+   corresponding to the start date of the current subscription.
+
+6. Change database name in createFaddsDatabase.sql
+
+7. Run command on server to execute createFaddsDatabase.sql
+   mysql -p -u januskad_admin januskad_faddsDDMMYYYY < createFaddsDatabase.sql
+
