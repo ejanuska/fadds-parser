@@ -26,37 +26,27 @@ public class FaddsDataDelimiter{
 
    private static    LayoutParser         layout            = new LayoutParser();
    private final     String               DEFAULT_DELIMITER = "|";
-	private LinkedList< LinkedList<String> > outputBuffer;
+	private           LinkedList< LinkedList<String> > outputBuffer;
 	private           LinkedList<String>   recTypeList;
    private           FaddsBuffer          buffer;
-   private     String       workingPath;
+   private           String               workingPath;
 
    /* Constructors */
    public FaddsDataDelimiter(){}
-   public FaddsDataDelimiter( LayoutParser layoutIn ){
-      layout = layoutIn;
-		
-		// Setup for buffer
-		buffer = new FaddsBuffer ( layout );
-      setupDirectories();
-   }
 
    public FaddsDataDelimiter( LayoutParser layoutIn, String path ){
       layout = layoutIn;
       workingPath = new String( path );
       System.out.printf("\nfrom FDD workingPath: " + workingPath + "\n");
       // Setup for buffer
-      buffer = new FaddsBuffer ( layout );
+      buffer = new FaddsBuffer ( layout, workingPath );
       setupDirectories();
    }
    
    // get data file name from layout object
    private String getDataFilePath(){
       
-      //String workingDir = System.getProperty( "user.dir" );
-      //String filePath = new String ( workingDir + File.separator + 
-            //"data" + File.separator + layout.getProductName().toUpperCase() + ".txt" );
-       String filePath = new String ( workingPath + File.separator + 
+      String filePath = new String ( workingPath + File.separator + 
               layout.getProductName().toUpperCase() + ".txt" );
 
       return filePath;
@@ -72,38 +62,11 @@ public class FaddsDataDelimiter{
          File.separator +
          layout.getProductName() 
       );
-      /*
-      String productPath = new String( 
-         System.getProperty( "user.dir" ) + 
-         File.separator + 
-         "delimited_data" +
-         File.separator +
-         layout.getProductName() 
-      ); */
 
       File dirProd = new File( productPath );
       if( !dirProd.exists() ){ 
          dirProd.mkdirs();
       }
-      
-      /*LinkedList<String> lrtList = layout.getLayoutRecordTypeList();
-      for ( String item : lrtList ){
-      
-         // Create directory if it does not exist
-         String lrtPath = new String( 
-            System.getProperty( "user.dir" ) + 
-            File.separator + 
-            "delimited_data" +
-            File.separator +
-            layout.getProductName() +
-            File.separator + 
-            item.toUpperCase() 
-         );
-         File dirLrt = new File( lrtPath );
-         if( !dirLrt.exists() ){ 
-            dirLrt.mkdirs();
-         }
-      }*/
    }
    
    public void scanDataFile(){
@@ -189,7 +152,6 @@ public class FaddsDataDelimiter{
       output.append("|\n");
       
       // DEBUGGING OUTPUT
-      
       //System.out.printf( "\nline: %s\noutput: %s", line.substring(0, 80) , output );
   
       return output.toString();

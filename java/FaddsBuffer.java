@@ -24,11 +24,13 @@ public class FaddsBuffer{
    private           LinkedList<String>   recTypeList;
    private           boolean              bufferFull        = false;
    private           LinkedList< LinkedList<String> > outputBuffer;
+   private           String               workingPath;
    
    /* Constructors */
    public FaddsBuffer(){}
-   public FaddsBuffer( LayoutParser layoutIn ){
+   public FaddsBuffer( LayoutParser layoutIn, String path ){
       layout = layoutIn;
+      workingPath = new String( path );
 		
 		// Setup buffer, uses layout
 		setupBuffer();
@@ -58,24 +60,24 @@ public class FaddsBuffer{
    }
    
 	private void setupBuffer(){
-	   // Setup list of record types
-      recTypeList = new LinkedList<String>();
+    // Setup list of record types
+    recTypeList = new LinkedList<String>();
 		recTypeList = layout.getLayoutRecordTypeList();
 		outputBuffer = new LinkedList< LinkedList<String> >();
 		
 		// Setup Buffer with a list for each layout record type list
 		// outputBuffer is a LinkedList of LinkedList
 		for ( String recType : recTypeList ){
-		   LinkedList<String> newList = new LinkedList<String>();
+		  LinkedList<String> newList = new LinkedList<String>();
 			outputBuffer.add( newList );
-         eraseFile( recType );
+      eraseFile( recType );
 		}
 	}
    
    void eraseFile( String strRecType ){
       String   deleteFilePath = new String ();
       deleteFilePath = 
-              System.getProperty( "user.dir" ) + 
+              workingPath + 
               File.separator + 
               "delimited_data" +
               File.separator +
@@ -107,7 +109,7 @@ public class FaddsBuffer{
           // Where the files are written
          // current directory\fadds\delimited_data\PRODUCT NAME\RECORD TYPE NAME.psv
          outputFilePath = 
-              System.getProperty( "user.dir" ) + 
+              workingPath + 
               File.separator + 
               "delimited_data" +
               File.separator +
@@ -118,14 +120,14 @@ public class FaddsBuffer{
               
          try {
 			   File file = new File( outputFilePath );
-            // If file doesnt exist, create it
-            if ( !file.exists() ) { file.createNewFile(); }
-            FileWriter fw = new FileWriter( file.getAbsoluteFile(), true );
+         // If file doesnt exist, create it
+         if ( !file.exists() ) { file.createNewFile(); }
+         FileWriter fw = new FileWriter( file.getAbsoluteFile(), true );
 			   BufferedWriter bw = new BufferedWriter( fw );
             
-            // Finally write each line to the file
-				while( lrtBuffer.size() > 0 ){
-               bw.write( lrtBuffer.pop() );
+         // Finally write each line to the file
+				 while( lrtBuffer.size() > 0 ){
+           bw.write( lrtBuffer.pop() );
 			   }
 
 		      bw.close();

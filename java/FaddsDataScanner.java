@@ -1,3 +1,7 @@
+/*
+  This class is used to start the parsing operation.
+*/
+
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.util.NoSuchElementException;
@@ -6,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
 
 public class FaddsDataScanner{
 
@@ -21,7 +26,6 @@ public class FaddsDataScanner{
       fc = new FileChooser();
       faddsPath = new String( fc.getFaddsDir( "Select FADDS data folder") );
       //System.out.printf("\nFaddsDataDelimiter faddsPath: " + faddsPath + "\n");
-
         
       for ( Products prod : Products.values() ) 
       {

@@ -193,7 +193,7 @@
                j = str.indexOf(".");
                if ( j > 0 ) { str = str.substring( 0, j ); }
                
-               // make camel case
+               // output_this_format
                String firstChar = str.substring( 0, 1 );
                String otherChars = str.substring( 1, str.length() ).toLowerCase();
               
@@ -202,7 +202,9 @@
             i++;
          }
          // remove trailing "_"
-         fieldText = output.substring( 0, output.length() - 1).toString();
+         if (output.length() > 0){
+           fieldText = output.substring( 0, output.length() - 1).toString();
+         }
          // fieldText = output.toString();
       }
       
