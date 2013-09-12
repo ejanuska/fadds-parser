@@ -20,7 +20,7 @@ public class FaddsDataScanner{
 
       fc = new FileChooser();
       faddsPath = new String( fc.getFaddsDir( "Select FADDS data folder") );
-      System.out.printf("\nFaddsDataDelimiter faddsPath: " + faddsPath + "\n");
+      //System.out.printf("\nFaddsDataDelimiter faddsPath: " + faddsPath + "\n");
 
         
       for ( Products prod : Products.values() ) 
@@ -33,8 +33,8 @@ public class FaddsDataScanner{
          //System.out.printf("\nNow delimiting product %s", prod.getFieldName() );
          
        //  if ( prod.getFieldName().compareToIgnoreCase( "aff" ) == 0 ){
-          //  FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout, faddsPath );
-          //  fdd.scanDataFile();
+            FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout, faddsPath );
+            fdd.scanDataFile();
             //break;
         // }
       }
