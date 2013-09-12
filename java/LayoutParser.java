@@ -36,7 +36,7 @@
       private static Boolean                              firstType = true;
       private        Integer                              recordtypeLength;
       private        LayoutFieldDescriptor                lfd;
-         
+      private        FileChooser                fc;   
       /* Constructors */
       public LayoutParser(){}
       public LayoutParser( String product ){ productName = product; }
@@ -106,11 +106,16 @@
       }
       
       // takes filename in this format xxx_rf.txt, where xxx is product 
-      public void scanFile( String filename ){
+      public void scanFile( String filename, String filePath ){
          resetParser(); 
-         String workingDir = System.getProperty( "user.dir" );
-         String filePath   = new String ( workingDir + File.separator + "data" 
-                                      + File.separator + "Layout_Data" + File.separator + filename );
+         // String workingDir = System.getProperty( "user.dir" );
+         
+         //fc = new FileChooser();
+         //filePath = new String( filePath + File.separator + filename );
+
+         filePath = new String ( 
+            filePath + File.separator + "Layout_Data" + File.separator + filename );
+
          String rawInputLine; 
          /* 
             Create recordTypeList, populate recordTypeName for each layoutRecordType in the recordTypeList.

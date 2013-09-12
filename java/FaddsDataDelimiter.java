@@ -44,6 +44,7 @@ public class FaddsDataDelimiter{
    public FaddsDataDelimiter( LayoutParser layoutIn, String path ){
       layout = layoutIn;
       workingPath = new String( path );
+      System.out.printf("\nfrom FDD workingPath: " + workingPath + "\n");
       // Setup for buffer
       buffer = new FaddsBuffer ( layout );
       setupDirectories();
@@ -52,7 +53,6 @@ public class FaddsDataDelimiter{
    // get data file name from layout object
    private String getDataFilePath(){
       
-
       //String workingDir = System.getProperty( "user.dir" );
       //String filePath = new String ( workingDir + File.separator + 
             //"data" + File.separator + layout.getProductName().toUpperCase() + ".txt" );

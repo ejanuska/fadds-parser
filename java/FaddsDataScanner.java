@@ -19,22 +19,22 @@ public class FaddsDataScanner{
       //st.createInserts();
 
       fc = new FileChooser();
-      faddsPath = new String( fc.getFaddsDir() );
-      //System.out.printf("\nfrom FileChooser: " + faddsPath + "\n");
+      faddsPath = new String( fc.getFaddsDir( "Select FADDS data folder") );
+      System.out.printf("\nFaddsDataDelimiter faddsPath: " + faddsPath + "\n");
 
         
       for ( Products prod : Products.values() ) 
       {
          System.out.printf( "\nNow scanning layout for " + prod.getFieldName() + "_rf.txt\n" );
-         layout.scanFile( prod.getFieldName() + filnameSuffix );
+         layout.scanFile( prod.getFieldName() + filnameSuffix, faddsPath );
          LinkedList<String> lrtList = layout.getLayoutRecordTypeList();
          
                
-         System.out.printf("\nNow delimiting product %s", prod.getFieldName() );
+         //System.out.printf("\nNow delimiting product %s", prod.getFieldName() );
          
        //  if ( prod.getFieldName().compareToIgnoreCase( "aff" ) == 0 ){
-            FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout, faddsPath );
-            fdd.scanDataFile();
+          //  FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout, faddsPath );
+          //  fdd.scanDataFile();
             //break;
         // }
       }
