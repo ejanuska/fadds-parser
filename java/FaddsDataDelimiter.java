@@ -29,6 +29,7 @@ public class FaddsDataDelimiter{
 	private LinkedList< LinkedList<String> > outputBuffer;
 	private           LinkedList<String>   recTypeList;
    private           FaddsBuffer          buffer;
+   private     String       workingPath;
 
    /* Constructors */
    public FaddsDataDelimiter(){}
@@ -39,24 +40,47 @@ public class FaddsDataDelimiter{
 		buffer = new FaddsBuffer ( layout );
       setupDirectories();
    }
+
+   public FaddsDataDelimiter( LayoutParser layoutIn, String path ){
+      layout = layoutIn;
+      workingPath = new String( path );
+      // Setup for buffer
+      buffer = new FaddsBuffer ( layout );
+      setupDirectories();
+   }
    
    // get data file name from layout object
    private String getDataFilePath(){
-      String workingDir = System.getProperty( "user.dir" );
-      String filePath = new String ( workingDir + File.separator + "data" + File.separator + layout.getProductName().toUpperCase() + ".txt" );
+      
+
+      //String workingDir = System.getProperty( "user.dir" );
+      //String filePath = new String ( workingDir + File.separator + 
+            //"data" + File.separator + layout.getProductName().toUpperCase() + ".txt" );
+       String filePath = new String ( workingPath + File.separator + 
+              layout.getProductName().toUpperCase() + ".txt" );
+
       return filePath;
    }
    
    private void setupDirectories(){
-         
+      
       // Create directory if it does not exist
+      String productPath = new String( 
+         workingPath + 
+         File.separator + 
+         "delimited_data" +
+         File.separator +
+         layout.getProductName() 
+      );
+      /*
       String productPath = new String( 
          System.getProperty( "user.dir" ) + 
          File.separator + 
          "delimited_data" +
          File.separator +
          layout.getProductName() 
-      );
+      ); */
+
       File dirProd = new File( productPath );
       if( !dirProd.exists() ){ 
          dirProd.mkdirs();

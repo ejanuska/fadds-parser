@@ -19,7 +19,7 @@ public class FaddsBuffer{
 
    private static    LayoutParser         layout            = new LayoutParser();
    private final     String               DEFAULT_DELIMITER = "|";
-	private final     Integer              MAX_BUFFER_SIZE   = 50;
+	 private final     Integer              MAX_BUFFER_SIZE   = 50;
    private           List<String>         buffer;
    private           LinkedList<String>   recTypeList;
    private           boolean              bufferFull        = false;

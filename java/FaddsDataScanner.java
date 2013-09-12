@@ -12,10 +12,15 @@ public class FaddsDataScanner{
     public static void main( String args[] ) {
       LayoutParser layout = new LayoutParser();
       String filnameSuffix = "_rf.txt";
-      
+      String faddsPath;
+      FileChooser    fc;
       //layout.scanFile( "fss" + filnameSuffix );
       //SqlTable st = new SqlTable( layout );
       //st.createInserts();
+
+      fc = new FileChooser();
+      faddsPath = new String( fc.getFaddsDir() );
+      //System.out.printf("\nfrom FileChooser: " + faddsPath + "\n");
 
         
       for ( Products prod : Products.values() ) 
@@ -28,7 +33,7 @@ public class FaddsDataScanner{
          System.out.printf("\nNow delimiting product %s", prod.getFieldName() );
          
        //  if ( prod.getFieldName().compareToIgnoreCase( "aff" ) == 0 ){
-            FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout );
+            FaddsDataDelimiter fdd = new FaddsDataDelimiter( layout, faddsPath );
             fdd.scanDataFile();
             //break;
         // }
